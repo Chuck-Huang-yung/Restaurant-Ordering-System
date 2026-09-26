@@ -13,6 +13,8 @@
 ---
 
 ## 🖥️ 實際操作畫面 - 線上點餐頁面
+<img width="931" height="491" alt="image" src="https://github.com/user-attachments/assets/a44cb16e-f357-452a-9955-47789661bcfe" />
+
 <img width="928" height="493" alt="image" src="https://github.com/user-attachments/assets/718aaadd-bfa6-4b5f-892b-3d76ebdc6b0d" />
 
 ---
