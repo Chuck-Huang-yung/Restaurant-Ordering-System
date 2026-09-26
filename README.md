@@ -12,6 +12,11 @@
 
 ---
 
+## 🖥️ 實際操作畫面 - 線上點餐頁面
+<img width="928" height="493" alt="image" src="https://github.com/user-attachments/assets/718aaadd-bfa6-4b5f-892b-3d76ebdc6b0d" />
+
+---
+
 ## ✨ 核心業務模組 (Core Business Features)
 
 本系統深度模擬了真實餐飲業的線上接單流程，實作以下核心模組：
