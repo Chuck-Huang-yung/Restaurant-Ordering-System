@@ -1,0 +1,21 @@
+﻿@using ShoppingCart.Models
+@using Newtonsoft.Json
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!--從 Session 讀取購物車資料，計算購物車內商品數量和總金額，然後顯示一個購物車按鈕並帶上數量與價格摘要 -->
+
+@{
+    var session = HttpContextAccessor.HttpContext!.Session;
+    var cartJson = session.GetString("Cart"); // Cart程式統一
+    var cart = string.IsNullOrEmpty(cartJson)
+        ? new List<Cart>()
+        : JsonConvert.DeserializeObject<List<Cart>>(cartJson);
+
+    int totalQuantity = cart?.Sum(c => c.Quantity) ?? 0;
+    int totalAmount = cart?.Sum(c => (c.BasePrice + c.AddonTotalPrice) * c.Quantity) ?? 0;
+
+}
+
+<a href="/Cart" class="btn btn-outline-primary">
+    🛒 購物車 (@totalQuantity) 件商品 - 總計 NT$ @totalAmount
+</a>

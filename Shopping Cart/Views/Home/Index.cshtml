@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "歡迎光臨 泰酷啦 餐廳";
+}
+
+<!-- 歡迎區塊，含泰式背景圖 -->
+<div style="background-image: url('/images/mathew-schwartz-gsllxmVO4HQ-unsplash-scaled.jpg'); background-size: cover; background-position: center; padding: 4rem 1rem;">
+    <h2 class="text-center mb-4" style="font-size: 1.5rem; font-weight: bold; color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">
+        @ViewData["Title"]
+    </h2>
+</div>
+
+
+<!-- 本週推薦 -->
+    <div class="p-4 rounded shadow" style="background-color: #fff3e0; border: 2px solid #ffcc80;">
+        <h2 class="mb-4 fw-bold text-center" style="color: var(--main-gold-orange);">🔥 本週推薦 🔥</h2>
+
+        <div id="weeklyCarousel" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+            <div class="carousel-inner">
+
+          <div class="carousel-item active">
+                <a href="/Menu/Details?name=月亮蝦餅" style="text-decoration: none; color: inherit;">
+             <div class="card border-0">
+               <img src="~/images/1_XEC0DxCVs4ikmuSqSeC1Ew.jpg" class="card-img-top w-100" alt="月亮蝦餅"
+                        style="height: 300px; object-fit: cover; border-radius: 0;">
+                    <div class="card-body text-center" style="background-color: #ffe5b4;">
+                        <h5 class="card-title fw-bold">月亮蝦餅</h5>
+                        <p class="card-text fw-bold">特色: 蝦仁丁、魚漿，名氣 No.1</p>
+                </div>
+            </div>
+          </a>
+    </div>
+
+            <div class="carousel-item">
+                <a href="/Menu/Details?name=打拋豬" style="text-decoration: none; color: inherit;">
+                <div class="card border-0">
+                    <img src="~/images/Thai Basil Pork.jpg" class="card-img-top w-100" alt="打拋豬"
+                         style="height: 300px; object-fit: cover; border-radius: 0;">
+                    <div class="card-body text-center" style="background-color: #ffe5b4;">
+                        <h5 class="card-title fw-bold">打拋豬</h5>
+                        <p class="card-text fw-bold">特色: 辣炒豬絞肉、九層塔風味</p>
+                    </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="carousel-item">
+                <a href="/Menu/Details?name=泰式炒泡麵" style="text-decoration: none; color: inherit;">
+                <div class="card border-0">
+                    <img src="~/images/ff94de011d0ddb30.jpg" class="card-img-top w-100" alt="打拋豬"
+                         style="height: 300px; object-fit: cover; border-radius: 0;">
+                    <div class="card-body text-center" style="background-color: #ffe5b4;">
+                        <h5 class="card-title fw-bold">泰式炒泡麵</h5>
+                        <p class="card-text fw-bold">特色: 酸辣泰式打拋豬拌炒泡麵、花枝</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+            <div class="carousel-item">
+                <a href="/Menu/Details?name=綠咖哩雞" style="text-decoration: none; color: inherit;">
+                <div class="card border-0">
+                    <img src="~/images/image-7-1024x682.webp" class="card-img-top w-100" alt="打拋豬"
+                         style="height: 300px; object-fit: cover; border-radius: 0;">
+                    <div class="card-body text-center" style="background-color: #ffe5b4;">
+                        <h5 class="card-title fw-bold">綠咖哩雞</h5>
+                        <p class="card-text fw-bold">特色: 綠咖哩醬、椰奶、去骨雞腿肉</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+
+
+        </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#weeklyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#weeklyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+</div> 
+<!-- 本週推薦 -->
+
+<!--優惠活動 -->
+<div class="p-4 rounded shadow mt-5" style="background-color: #fff3e0; border: 2px solid #ffcc80;">
+    <h2 class="mb-4 fw-bold text-center" style="color: var(--main-gold-orange); font-size: 2rem;">🎉 優惠活動 🎉</h2>
+
+    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            <!-- 滿500打95折 -->
+            <div class="carousel-item active">
+                <div class="card border-0">
+                    <div class="card-body text-center" style="background: linear-gradient(135deg, #ffe5b4, #ffcc80); padding: 2rem; border-radius: 1rem;">
+                        <h4 class="fw-bold mb-3" style="font-size: 1.8rem; color: #c75100;">💰 外送滿 <span style="font-size: 2rem;">500 元</span><span style="font-size: 1rem; vertical-align: super;"> </span></h4>
+                        <p class="fw-bold" style="font-size: 1.5rem; color: #b34700;">立即享 <span style="background: #fff3e0; padding: 0.2rem 0.6rem; border-radius: 0.5rem;">95 折優惠</span>！</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 當月壽星送泰奶 -->
+            <div class="carousel-item">
+                <div class="card border-0">
+                    <div class="card-body text-center" style="background: linear-gradient(135deg, #ffe5b4, #ffcc80); padding: 2rem; border-radius: 1rem;">
+                        <h4 class="fw-bold mb-3" style="font-size: 1.8rem; color: #c75100;">🎂 當月壽星 🎂</h4>
+                        <p class="fw-bold" style="font-size: 1.5rem; color: #b34700;">贈送 <span style="background: #fff3e0; padding: 0.2rem 0.6rem; border-radius: 0.5rem;">泰式奶茶</span> 一杯 🍹</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+
+<!-- 店家資訊 -->
+<footer class="thai-footer mt-5 d-flex justify-content-center gap-5">
+    <p>電話：02-1234-5678</p>
+    <p>地址：台北市松山區西米路99號</p>
+</footer>
+
+@section Scripts {
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("status") === "cleared") {
+            alert("✅ 購物車已清空！謝謝惠顧!");
+        }
+    </script>
+}
+

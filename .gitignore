@@ -1,0 +1,19 @@
+# Visual Studio 專案專用快取與設定 (絕對不能上傳)
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 編譯產出的二進位檔與暫存檔 (這兩個最重要！)
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# 本地端資料庫與紀錄檔
+*.sqlite
+*.log
+
+# macOS / Windows 系統產生的垃圾檔
+.DS_Store
+Thumbs.db

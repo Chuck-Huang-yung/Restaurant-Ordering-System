@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "套餐優惠";
+}
+
+<div class="container mt-5">
+    <h2 class="fw-bold text-center mb-4">🍱 套餐優惠</h2>
+
+    <!-- A 套餐 -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-4">
+            <img src="~/images/images (1).jfif" alt="A套餐" class="img-fluid rounded" style="height: 250px; object-fit: cover;">
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-primary fw-bold">A 套餐：個人獨推</h4>
+            <p>泰式炒泡麵 + 香蕉煎餅 + 一杯泰奶</p>
+            <p class="fw-bold">
+                金額：NT$250
+                <span class="text-muted ms-2" style="font-size: 0.9rem;"><del>原價 NT$330</del></span>
+            </p>
+            <a class="btn btn-outline-primary" asp-controller="SetMeal" asp-action="Details" asp-route-id="1">立即選購</a>
+        </div>
+    </div>
+
+    <!-- B 套餐 -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-4">
+            <img src="~/images/LINE_ALBUM_泰椰foodpanda_231003_1-600x439.jpg" alt="B套餐" class="img-fluid rounded" style="height: 250px; object-fit: cover;">
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-success fw-bold">B 套餐：雙人套餐</h4>
+            <p>任選三道菜 + 兩杯泰奶</p>
+            <p class="fw-bold">金額：NT$700</p>
+            <a class="btn btn-outline-primary" asp-controller="SetMeal" asp-action="Details" asp-route-id="2">立即選購</a>
+
+        </div>
+    </div>
+
+    <!-- C 套餐 -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-4">
+            <img src="~/images/Taipei-Thai-Food-Banner-e1609913742639.jpg" alt="C套餐" class="img-fluid rounded" style="height: 250px; object-fit: cover;">
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-danger fw-bold">C 套餐：家庭方案</h4>
+            <p>任選五道菜 + 冬蔭功海鮮湯 + 四杯泰奶</p>
+            <p class="fw-bold">金額：NT$1200</p>
+            <a class="btn btn-outline-danger" asp-controller="SetMeal" asp-action="Details" asp-route-id="3">立即選購</a>
+        </div>
+    </div>
+</div>

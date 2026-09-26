@@ -1,0 +1,199 @@
+﻿@model ShoppingCart.Models.Menu
+
+<!-- 套餐專區 -->
+
+@{
+    ViewData["Title"] = Model.Name;
+    var allMenus = ViewBag.MenuOptions as List<ShoppingCart.Models.Menu> ?? new List<ShoppingCart.Models.Menu>();
+
+
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">@Model.Name</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.Img" class="img-fluid rounded" alt="@Model.Name" style="height: 350px; object-fit: cover;" />           
+        </div>
+        <div class="col-md-6">
+            <h4 class="fw-bold mb-2">
+                金額：NT$@Model.Price
+                @if (!string.IsNullOrEmpty(Model?.Name) && Model.Name.Contains("A 套餐"))
+                {
+                    <span class="text-muted ms-2" style="font-size: 0.9em;"><del>原價 330 元</del></span>
+                }
+            </h4>
+            <p class="fw-bold mb-2">特色：@Model!.Description</p>
+
+            <hr />
+            <form id="addToCartForm">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <input type="hidden" name="name" value="@Model.Name" />
+                @if (Model?.Name?.Contains("A 套餐") == true)
+                {
+                    <p>此套餐為固定組合，不提供任選餐點。</p>
+                }
+                else if (Model?.Name?.Contains("B 套餐") == true || Model?.Name?.Contains("C 套餐") == true)
+                {
+                    int maxChoose = 0;
+                    if (Model.Name.Contains("B 套餐"))
+                    {
+                        maxChoose = 3;
+                    }
+                    else if (Model.Name.Contains("C 套餐"))
+                    {
+                        maxChoose = 5;
+                    }
+
+                    <h5 class="fw-bold mb-2">🍽 任選餐點：<small class="text-muted">（任選 @maxChoose 道菜）</small></h5>
+                    <div class="mb-3" style="max-height: 200px; overflow-y: auto;">
+                        @foreach (var menu in allMenus)
+                        {
+                            <div class="form-check mb-1">
+                                <input class="form-check-input addon-checkbox" type="checkbox" value="@menu.Name" name="addons" />
+                                <label class="form-check-label">@menu.Name</label>
+                            </div>
+                        }
+
+                    </div>
+                }
+                else
+                {
+                    <p>此套餐不支援任選餐點。</p>
+                }
+
+
+                <h6 class="fw-bold">選擇份數：</h6>
+                <div class="input-group mb-3 w-50">
+                    <button type="button" class="btn btn-outline-secondary" onclick="updateQty(-1)">-</button>
+                    <input type="text" class="form-control text-center" id="qty" name="quantity" value="1" readonly />
+                    <button type="button" class="btn btn-outline-secondary" onclick="updateQty(1)">+</button>
+                </div>
+
+                @{
+                    var price = Model?.Price ?? 0;
+                }
+                <h5 class="fw-bold">總金額：NT$ <span id="totalPrice">@price</span></h5>
+
+                <div class="mb-3">
+                    <label for="remark" class="form-label fw-bold">備註</label>
+                    <input type="text" class="form-control" id="remark" name="remark" placeholder="請輸入備註（選填）" />
+                </div>
+
+                <button type="submit" class="btn btn-primary fw-bold mt-2">加入購物車</button>
+
+                <div id="notification" class="mt-3 text-success fw-bold"></div>
+            </form>
+            <!-- 顯示加入成功通知 -->
+            <div id="notification" class="mt-3 text-success fw-bold"></div>
+        </div>
+    </div>
+
+    <div id="cartSummary" class="mt-5 p-3 bg-light border rounded fw-bold d-flex justify-content-between align-items-center">
+        <div id="cartText">
+            購物車：@ViewBag.CartQuantity 件商品，總金額 NT$ @ViewBag.CartAmount
+        </div>
+        <a href="/Cart" class="btn btn-success fw-bold">🛒 前往購物車</a>
+    </div>
+
+</div>
+
+    @section Scripts {
+        <script>
+        //	顯示多筆資料的清單
+        //套餐的優化
+            document.addEventListener("DOMContentLoaded", function () {
+                const basePrice = parseFloat("@Model.Price");
+                           const modelName = '@Html.Raw(Model.Name)';
+            console.log("modelName:", modelName);
+            const modelNameClean = modelName.replace(/\s+/g, '').trim();
+            console.log("modelNameClean:", modelNameClean);
+
+            let maxAddons = null;
+            if (modelNameClean.includes("B套餐")) {
+                maxAddons = 3;
+            } else if (modelNameClean.includes("C套餐")) {
+                maxAddons = 5;
+            }
+            console.log("maxAddons:", maxAddons);
+
+
+                function updateQty(change) {
+                    const qtyInput = document.getElementById("qty");
+                    let qty = parseInt(qtyInput.value);
+                    qty = Math.max(1, qty + change);
+                    qtyInput.value = qty;
+                    calculateTotal();
+                }
+
+                        function updateRemark() {
+            const checked = Array.from(document.querySelectorAll(".addon-checkbox:checked"));
+            const names = checked.map(cb => cb.value);
+            // 將勾選菜名合併成字串，放到備註欄位
+            document.getElementById("remark").value = names.join(", ");
+        }
+
+                function calculateTotal() {
+                    const qty = parseInt(document.getElementById("qty").value);
+                    const total = basePrice * qty; 
+                    document.getElementById("totalPrice").innerText = total;
+                }
+
+                // 限制任選餐點數量
+                           document.querySelectorAll(".addon-checkbox").forEach(cb => {
+                cb.addEventListener("change", function () {
+                    const checked = document.querySelectorAll(".addon-checkbox:checked");
+                    console.log("目前勾選數量:", checked.length, "最大可選:", maxAddons); // 加上這行！
+
+                    if (maxAddons !== null && checked.length > maxAddons) {
+                        this.checked = false;
+                        alert(`最多只能選擇 ${maxAddons} 項任選餐點`);
+                        return;
+                    }
+                   updateRemark();
+                    calculateTotal();
+                });
+            });
+
+
+                // 初始化
+                calculateTotal();
+                window.updateQty = updateQty;
+
+                // 送出
+                document.getElementById("addToCartForm").addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                  const checked = document.querySelectorAll(".addon-checkbox:checked");
+                  if (maxAddons !== null && checked.length < maxAddons) {
+                  alert(`請至少選擇 ${maxAddons} 項任選餐點`);
+                     return; // 阻止送出
+                        }
+
+                    const formData = new FormData(this);
+                    fetch('/SetMeal/AddToCart', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById("notification").innerText = data.message;
+                                      document.getElementById("cartSummary").innerHTML =
+                                        `購物車：${data.totalQuantity} 件商品，總金額 NT$ ${data.totalAmount}
+                                              <a href='/Cart' class='btn btn-success fw-bold ms-3'>🛒 前往購物車</a>`;
+
+
+                            } else {
+                                alert("加入購物車失敗：" + data.message);
+                            }
+                        })
+                        .catch(() => {
+                            alert("伺服器錯誤，請稍後再試");
+                        });
+                });
+            });
+        </script>
+    }
+

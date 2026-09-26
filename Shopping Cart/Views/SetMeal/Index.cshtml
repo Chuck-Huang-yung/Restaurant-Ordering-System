@@ -1,0 +1,39 @@
+﻿@model List<ShoppingCart.Models.Menu>
+@{
+    ViewData["Title"] = "套餐優惠";
+}
+
+<!-- 顯示單筆資料詳細內容 -->
+
+<div class="container mt-5">
+    <h2 class="fw-bold text-center mb-4">📦 套餐優惠</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="@item.Img" class="img-fluid rounded-start" alt="@item.Name" style="height: 200px; object-fit: cover;" />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text fw-bold">
+                            金額：NT$ @item.Price
+                            @if (!string.IsNullOrEmpty(item?.Name) && item.Name.Contains("A 套餐"))
+                            {
+                                <span class="text-muted ms-2" style="font-size: 0.9em;"><del>原價 330 元</del></span>
+                            }
+                        </p>
+                        <a asp-controller="SetMeal" asp-action="Details" asp-route-id="@(item?.Id ?? 0)" class="btn btn-outline-primary fw-bold">
+                            查看詳細
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

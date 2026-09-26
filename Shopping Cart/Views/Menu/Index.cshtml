@@ -1,0 +1,56 @@
+﻿@model List<ShoppingCart.Models.Menu>
+
+@{
+    ViewData["Title"] = "📋 點餐專區";
+    int cartQty = ViewBag.CartQuantity ?? 0;
+    int cartAmt = ViewBag.CartAmount ?? 0;
+}
+
+<h2 class="text-center mb-4 fw-bold">@ViewData["Title"]</h2>
+@if (cartQty > 0)
+{
+    <div class="mb-3 p-3 bg-light border rounded fw-bold">
+        購物車：@cartQty 件商品，總金額 NT$ @cartAmt
+    </div>
+}
+
+
+<div class="d-flex flex-column gap-4">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        <div class="card border-2 rounded shadow">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="@item.Img" class="img-fluid rounded-start" alt="@item.Name" />
+                </div>
+                <div class="col-md-8 p-3">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">@item.Name</h5>
+                        <p class="card-text fw-bold">@item.Description</p>
+                        <p class="card-text fw-bold"><strong>價格：</strong>NT$ @item.Price</p>
+                        <p class="card-text fw-bold">
+                            <strong>辣度：</strong>
+                            @if (item.Spicy)
+                            {
+                                <span style="color: red;" class="fw-bold">🌶️辣</span>
+                            }
+                            else
+                            {
+                                <span style="color: gray;" class="fw-bold">不辣</span>
+                            }
+                        </p>
+
+                        <a class="btn btn-warning fw-bold"
+                           asp-controller="Menu"
+                           asp-action="Details"
+                           asp-route-name="@item.Name">進入選購</a>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

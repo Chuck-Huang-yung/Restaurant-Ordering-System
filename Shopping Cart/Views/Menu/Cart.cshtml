@@ -1,0 +1,133 @@
+﻿@model List<ShoppingCart.Models.Cart>
+<h2 class="mb-4">🛒 我的購物車</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">購物車是空的。</div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead class="table-warning">
+            <tr>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>加購</th>
+                <th>備註</th>
+                <th>總價</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" asp-controller="Cart" method="post" class="d-flex align-items-center">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control form-control-sm me-2" style="width: 80px;" />
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">更新</button>
+                        </form>
+                    </td>
+                    <td>
+                        @if (item.Addons != null && item.Addons.Any())
+                        {
+                            <ul class="mb-0">
+                                @foreach (var addon in item.Addons)
+                                {
+                                    <li>@addon</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>無</span>
+                        }
+                    </td>
+                    <td>@item.Remark</td>
+                    <td>NT$ @(item.Quantity * (item.BasePrice + item.AddonTotalPrice))</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" asp-controller="Cart" method="post" onsubmit="return confirm('確定要刪除此商品嗎？');">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">🗑 刪除</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form id="checkoutForm" class="mt-4">
+        <div class="d-flex align-items-center mb-3">
+            <label for="tableNumber" class="form-label me-2 fw-bold">桌號：</label>
+            <select id="tableNumber" class="form-select w-auto me-3">
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-success">前往結帳</button>
+        </div>
+    </form>
+
+    @section Scripts {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var tableSelect = document.getElementById("tableNumber");
+                var checkoutForm = document.getElementById("checkoutForm");
+                var checkoutBtn = document.querySelector("#checkoutForm button[type='submit']");
+
+                var savedTable = localStorage.getItem('selectedTableNumber');
+                if (savedTable && tableSelect) {
+                    tableSelect.value = savedTable;
+                }
+
+                function toggleCheckoutBtn() {
+                    if (checkoutBtn && tableSelect) {
+                        checkoutBtn.disabled = !tableSelect.value;
+                    }
+                }
+
+                toggleCheckoutBtn();
+
+                if (tableSelect) {
+                    tableSelect.addEventListener("change", function () {
+                        localStorage.setItem('selectedTableNumber', this.value);
+                        toggleCheckoutBtn();
+                    });
+                }
+
+                if (checkoutForm) {
+                    checkoutForm.addEventListener("submit", function (e) {
+                        e.preventDefault();
+                        var tableNumber = tableSelect.value;
+                        if (!tableNumber) {
+                            alert("請先選擇桌號！");
+                            return;
+                        }
+                      const confirmResult = confirm("已生成訂單，" + tableNumber + "號桌，請前往櫃台結帳🔘");
+
+                        if (confirmResult) {
+                        fetch("/Cart/ClearCart", {
+                            method: "POST"
+                        }).then(() => {
+                            // 清除 localStorage 的桌號
+                            localStorage.removeItem("selectedTableNumber");
+
+                            // 直接跳轉回主頁
+                            window.location.href = "/?status=cleared";
+                        });
+                    }
+                });
+                }
+            });
+        </script>
+}
+
+
+
+    <div class="text-end fw-bold fs-5">
+        總金額：NT$ @Model.Sum(item => item.Quantity * (item.BasePrice + item.AddonTotalPrice))
+    </div>
+}

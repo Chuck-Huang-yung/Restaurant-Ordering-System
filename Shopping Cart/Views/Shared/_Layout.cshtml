@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Shopping_Cart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Shopping_Cart.styles.css" asp-append-version="true" />
+
+    <style>
+        body {
+            background-color: #fff3e0; /* 橘黃色調，像泰式風格 */
+        }
+
+        .thai-footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background-color: #ffe0b2; /* 更深一點的橘色做區隔 */
+            border-top: 2px solid #ffb74d;
+        }
+
+            .thai-footer p {
+                margin: 0;
+                font-weight: bold;
+            }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg px-5 py-4" style="background-color: #ffe0b2;">
+            <!-- 左側選單按鈕 -->
+            <div class="d-flex align-items-center fw-bold">
+            <button class="btn btn-outline-dark me-3 fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-controls="sideMenu">
+                &#9776;
+            </button>
+            <span class="text-dark">選單</span>
+            </div>
+
+            <!-- 店名置中 -->
+            <div class="position-absolute start-50 translate-middle-x fw-bold fs-1" style="color: #d18b00;">
+                <span style="font-size: 1.5rem;">🌶️🌶️🌶️</span> 泰酷啦 <span style="font-size: 1.5rem;">🐘🐘🐘</span>
+            </div>
+
+
+            <!-- 導覽列右側：職人標語 -->
+            <div class="ms-auto fs-6 fw-bold text-dark d-none d-md-block">
+                職人專業泰式料理餐廳
+            </div>
+        </nav>
+
+        <!-- 側邊導覽選單 -->
+        <div class="offcanvas offcanvas-start text-dark fw-bold" tabindex="-1" id="sideMenu" aria-labelledby="sideMenuLabel" style="background-color: #fff3e0;">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">選單功能</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">🏠 主頁</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Menu">🍽 點餐專區</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-dark" asp-controller="SetMeal" asp-action="Index">📦 套餐優惠</a>
+                    </li>
+                    <li class="nav-item">
+                        @await Html.PartialAsync("_CartSummaryPartial")
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Shopping_Cart - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+  
+
+</body>
+</html>
