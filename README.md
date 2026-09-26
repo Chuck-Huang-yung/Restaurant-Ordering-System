@@ -13,10 +13,10 @@
 ---
 
 ## 🖥️ 實際操作畫面 - 線上點餐頁面
-<img width="928" height="493" alt="image" src="https://github.com/user-attachments/assets/718aaadd-bfa6-4b5f-892b-3d76ebdc6b0d" />
+<img width="1900" height="1010" alt="螢幕擷取畫面 2026-09-27 023803" src="https://github.com/user-attachments/assets/c3012366-5378-46c2-ae1c-83cf4bd826e9" />
 
 
-<img width="931" height="490" alt="image" src="https://github.com/user-attachments/assets/2ef5818e-f852-4eb0-a266-8432899cc374" />
+<img width="1919" height="1003" alt="螢幕擷取畫面 2026-09-27 025143" src="https://github.com/user-attachments/assets/81533aaf-e546-485a-b3c7-c433d3132b58" />
 
 ---
 
