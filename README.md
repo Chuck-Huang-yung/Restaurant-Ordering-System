@@ -13,7 +13,7 @@
 ---
 
 ## 🖥️ 實際操作畫面 - 線上點餐頁面
-<img width="1900" height="1010" alt="螢幕擷取畫面 2026-09-27 023803" src="https://github.com/user-attachments/assets/c3012366-5378-46c2-ae1c-83cf4bd826e9" />
+<img width="1888" height="1010" alt="螢幕擷取畫面 2026-09-27 023803" src="https://github.com/user-attachments/assets/acb6a70a-efa3-4bf0-8b09-bba5f45b41a7" />
 
 
 <img width="1919" height="1003" alt="螢幕擷取畫面 2026-09-27 025143" src="https://github.com/user-attachments/assets/81533aaf-e546-485a-b3c7-c433d3132b58" />
