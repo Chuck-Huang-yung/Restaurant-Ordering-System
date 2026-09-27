@@ -41,7 +41,7 @@
 * **視圖引擎：** Razor Pages (動態 HTML 渲染)
 * **資料存取：** Entity Framework Core (ORM) / LINQ 查詢
 * **前端整合：** HTML5, CSS3, Bootstrap (RWD 響應式網頁設計)
-* **架構模式：** 嚴格遵守 MVC (Model-View-Controller) 設計模式，將商業邏輯、資料存取與 UI 介面完美解耦。
+* **架構模式：** 嚴格遵守 MVC (Model-View-Controller) 設計模式，將商業邏輯、資料存取與 UI 介面完美解耦
 
 ---
 
